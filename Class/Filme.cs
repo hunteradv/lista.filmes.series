@@ -14,8 +14,10 @@ namespace ListaFilmesSeries
         private int anoLancamentoFilme { get; set; }
         private float notaFilme { get; set; }
         private string avaliacaoFilme { get; set; }
+        public bool Excluido { get; set; }
 
         //metods
+        //constructor
         public Filme(int id, Genero generoFilme, int anoLancamentoFilme, float notaFilme, string avaliacaoFilme)
         {
             this.id = id;
@@ -23,6 +25,7 @@ namespace ListaFilmesSeries
             this.anoLancamentoFilme = anoLancamentoFilme;
             this.notaFilme = notaFilme;
             this.avaliacaoFilme = avaliacaoFilme;
+            this.Excluido = false;
         }
 
         public override string ToString()
@@ -44,6 +47,11 @@ namespace ListaFilmesSeries
         public int retornaId()
         {
             return this.id;
+        }
+
+        public void Excluir()
+        {
+            this.Excluido = true;
         }
     }
 }
