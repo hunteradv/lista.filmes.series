@@ -21,13 +21,13 @@ namespace ListaFilmesSeries
                         InserirFilme();
                         break;
                     case "3":
-                        //AlterarFilmes();
+                        AtualizarFilme();
                         break;
                     case "4":
-                        //VisualizaFilmes();
+                        VisualizarFilme();
                         break;
                     case "5":
-                        //ExcluirFilmes();
+                        ExcluirFilme();
                         break;
                     case "C":
                         Console.Clear();
@@ -58,7 +58,8 @@ namespace ListaFilmesSeries
             
             foreach (var filme in lista)
             {
-                Console.WriteLine("#id {0}: - {1}", filme.retornaId(), filme.retornaTitulo());
+                var excluido = filme.retornaExcluido();
+                Console.WriteLine("#id {0}: - {1} - {2}", filme.retornaId(), filme.retornaTitulo(), (excluido ? "*Excluído*" : ""));
             }
         }
 
@@ -98,6 +99,63 @@ namespace ListaFilmesSeries
                                             avaliacaoFilme: entradaAvaliacao);
 
             repository.Insere(novoFilme);
+        }
+
+        public static void AtualizarFilme()
+        {
+            Console.WriteLine("Digite o id do filme: ");
+            int idFilme = int.Parse(Console.ReadLine());
+
+            foreach (int i in Enum.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
+            }
+
+            Console.WriteLine("");
+            Console.Write("Digite o gênero entre as opções acima: ");
+            int entradaGenero = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite o título do filme: ");
+            string entradaTitulo = Console.ReadLine();
+
+            Console.Write("Digite o ano de lançamento: ");
+            int entradaAno = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite a nota (1 a 5): ");
+            float entradaNota = float.Parse(Console.ReadLine());
+            if (entradaNota > 5 || entradaNota < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            Console.WriteLine("Digite a avaliação: ");
+            string entradaAvaliacao = Console.ReadLine();
+
+            Filme atualizaFilme = new Filme(id: idFilme,
+                                            generoFilme: (Genero)entradaGenero,
+                                            tituloFilme: entradaTitulo,
+                                            anoLancamentoFilme: entradaAno,
+                                            notaFilme: entradaNota,
+                                            avaliacaoFilme: entradaAvaliacao);
+
+            repository.Atualiza(idFilme, atualizaFilme);                                                
+        }
+
+        public static void VisualizarFilme()
+        {
+            Console.Write("Digite o id do filme: ");
+            int idFilme = int.Parse(Console.ReadLine());
+
+            var filme = repository.RetornaId(idFilme);
+            Console.WriteLine(filme);
+        }
+
+        public static void ExcluirFilme()
+        {
+            Console.Write("Digite o id do filme: ");
+            int idFilme = int.Parse(Console.ReadLine());
+
+            repository.Exclui(idFilme);
         }
 
         private static string ObterOpcaoUsuario()

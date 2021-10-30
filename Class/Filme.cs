@@ -37,6 +37,7 @@ namespace ListaFilmesSeries
             retorno += "Ano de lançamento: " + this.anoLancamentoFilme + Environment.NewLine;
             retorno += "Nota: " + this.notaFilme + Environment.NewLine;
             retorno += "Avalicação: " + this.avaliacaoFilme + Environment.NewLine;
+            retorno += "Excluido: " + this.Excluido;
             return retorno;
         }
 
@@ -48,6 +49,11 @@ namespace ListaFilmesSeries
         public int retornaId()
         {
             return this.id;
+        }
+
+        public bool retornaExcluido()
+        {
+            return this.Excluido;
         }
 
         public void Excluir()
