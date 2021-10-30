@@ -19,14 +19,14 @@ namespace ListaFilmesSeries
             listaFilme[id].Excluir();
         }
 
-        public void insere(Filme objeto)
+        public void Insere(Filme objeto)
         {
             listaFilme.Add(objeto);
         }
 
         public List<Filme> Lista()
         {
-            return Lista();
+            return listaFilme;
         }
 
         public int ProximoId()

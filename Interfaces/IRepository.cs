@@ -10,7 +10,7 @@ namespace ListaFilmesSeries
     {
         List<T> Lista();
         T RetornaId(int id);
-        void insere(T entidade);
+        void Insere(T entidade);
         void Exclui(int id);
         void Atualiza(int id, T entidade);
         int ProximoId();    
